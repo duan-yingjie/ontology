@@ -1,0 +1,1565 @@
+@prefix : <http://www.nutrition.com#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.nutrition.com> .
+
+<http://www.nutrition.com> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.nutrition.com#hasCountryOfOrigin
+:hasCountryOfOrigin rdf:type owl:ObjectProperty ,
+                             owl:TransitiveProperty .
+
+
+###  http://www.nutrition.com#hasFood
+:hasFood rdf:type owl:ObjectProperty ;
+         rdfs:domain :Recipe ;
+         rdfs:range :FoodType .
+
+
+###  http://www.nutrition.com#hasUser
+:hasUser rdf:type owl:ObjectProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Recipe ;
+         rdfs:range :User .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.nutrition.com#hasAge
+:hasAge rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:integer .
+
+
+###  http://www.nutrition.com#hasCa
+:hasCa rdf:type owl:DatatypeProperty ;
+       rdfs:range xsd:float .
+
+
+###  http://www.nutrition.com#hasCalorie
+:hasCalorie rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:float .
+
+
+###  http://www.nutrition.com#hasDietaryFiber
+:hasDietaryFiber rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:float .
+
+
+###  http://www.nutrition.com#hasFat
+:hasFat rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:float .
+
+
+###  http://www.nutrition.com#hasProtein
+:hasProtein rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:float .
+
+
+###  http://www.nutrition.com#hasVitaminC
+:hasVitaminC rdf:type owl:DatatypeProperty ;
+             rdfs:range xsd:float .
+
+
+###  http://www.nutrition.com#hasWeight
+:hasWeight rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:float .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.nutrition.com#Almond
+:Almond rdf:type owl:Class ;
+        rdfs:subClassOf :Fruit .
+
+
+###  http://www.nutrition.com#Apple
+:Apple rdf:type owl:Class ;
+       rdfs:subClassOf :Fruit .
+
+
+###  http://www.nutrition.com#Banana
+:Banana rdf:type owl:Class ;
+        rdfs:subClassOf :Fruit .
+
+
+###  http://www.nutrition.com#Beans
+:Beans rdf:type owl:Class ;
+       rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#Beef
+:Beef rdf:type owl:Class ;
+      rdfs:subClassOf :Meat .
+
+
+###  http://www.nutrition.com#Blueberry
+:Blueberry rdf:type owl:Class ;
+           rdfs:subClassOf :Fruit .
+
+
+###  http://www.nutrition.com#BlueberrySmotthieBowl
+:BlueberrySmotthieBowl rdf:type owl:Class ;
+                       rdfs:subClassOf :NamedRecipe ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasFood ;
+                                         owl:someValuesFrom :Almond
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasFood ;
+                                         owl:someValuesFrom :Banana
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasFood ;
+                                         owl:someValuesFrom :Blueberry
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasFood ;
+                                         owl:someValuesFrom :Butter
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasFood ;
+                                         owl:allValuesFrom [ rdf:type owl:Class ;
+                                                             owl:unionOf ( :Almond
+                                                                           :Banana
+                                                                           :Blueberry
+                                                                           :Butter
+                                                                         )
+                                                           ]
+                                       ] .
+
+
+###  http://www.nutrition.com#Bread
+:Bread rdf:type owl:Class ;
+       rdfs:subClassOf :Grain .
+
+
+###  http://www.nutrition.com#Burger
+:Burger rdf:type owl:Class ;
+        rdfs:subClassOf :NamedRecipe ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasFood ;
+                          owl:someValuesFrom :Beef
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasFood ;
+                          owl:someValuesFrom :Cheese
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasFood ;
+                          owl:someValuesFrom :Lettuce
+                        ] .
+
+
+###  http://www.nutrition.com#Butter
+:Butter rdf:type owl:Class ;
+        rdfs:subClassOf :Dairy .
+
+
+###  http://www.nutrition.com#Cauliflower
+:Cauliflower rdf:type owl:Class ;
+             rdfs:subClassOf :Vegetable ;
+             owl:disjointWith :Lettuce .
+
+
+###  http://www.nutrition.com#Cheese
+:Cheese rdf:type owl:Class ;
+        rdfs:subClassOf :Dairy .
+
+
+###  http://www.nutrition.com#Chicken
+:Chicken rdf:type owl:Class ;
+         rdfs:subClassOf :Meat .
+
+
+###  http://www.nutrition.com#ChineseRecipe
+:ChineseRecipe rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :Recipe
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasCountryOfOrigin ;
+                                                            owl:hasValue :China
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :Recipe .
+
+
+###  http://www.nutrition.com#Coconut
+:Coconut rdf:type owl:Class ;
+         rdfs:subClassOf :Fruit .
+
+
+###  http://www.nutrition.com#Country
+:Country rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:oneOf ( :China
+                                           :France
+                                           :Italie
+                                         )
+                             ] .
+
+
+###  http://www.nutrition.com#Couscous
+:Couscous rdf:type owl:Class ;
+          rdfs:subClassOf :Grain ;
+          owl:disjointWith :Rice .
+
+
+###  http://www.nutrition.com#Dairy
+:Dairy rdf:type owl:Class ;
+       rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#Female
+:Female rdf:type owl:Class ;
+        rdfs:subClassOf :Sex ;
+        owl:disjointWith :Male .
+
+
+###  http://www.nutrition.com#Fish
+:Fish rdf:type owl:Class ;
+      rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#FoodType
+:FoodType rdf:type owl:Class .
+
+
+###  http://www.nutrition.com#Fruit
+:Fruit rdf:type owl:Class ;
+       rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#FruitSalade
+:FruitSalade rdf:type owl:Class ;
+             rdfs:subClassOf :NamedRecipe ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasFood ;
+                               owl:someValuesFrom :Fruit
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasFood ;
+                               owl:someValuesFrom :Lettuce
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasFood ;
+                               owl:someValuesFrom :Yogurt
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasFood ;
+                               owl:allValuesFrom [ rdf:type owl:Class ;
+                                                   owl:unionOf ( :Fruit
+                                                                 :Lettuce
+                                                                 :Yogurt
+                                                               )
+                                                 ]
+                             ] .
+
+
+###  http://www.nutrition.com#Grain
+:Grain rdf:type owl:Class ;
+       rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#HealthyRecipeYoung
+:HealthyRecipeYoung rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasAge ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:integer ;
+                                                                                      owl:withRestrictions ( [ xsd:maxExclusive 55
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasCa ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:float ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive "800.0"^^xsd:float
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasCalorie ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:float ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive "1500.0"^^xsd:float
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasDietaryFiber ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:float ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive "20.0"^^xsd:float
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasFat ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:float ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive "50.0"^^xsd:float
+                                                                                                             ]
+                                                                                                             [ xsd:maxExclusive "80.0"^^xsd:float
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasProtein ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:float ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive "55.0"^^xsd:float
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( :Recipe
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasVitaminC ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:float ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive "60.0"^^xsd:float
+                                                                                                             ]
+                                                                                                             [ xsd:maxExclusive "100.0"^^xsd:float
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Recipe .
+
+
+###  http://www.nutrition.com#Lamb
+:Lamb rdf:type owl:Class ;
+      rdfs:subClassOf :Meat .
+
+
+###  http://www.nutrition.com#Lettuce
+:Lettuce rdf:type owl:Class ;
+         rdfs:subClassOf :Vegetable .
+
+
+###  http://www.nutrition.com#Male
+:Male rdf:type owl:Class ;
+      rdfs:subClassOf :Sex .
+
+
+###  http://www.nutrition.com#MapoTofu
+:MapoTofu rdf:type owl:Class ;
+          rdfs:subClassOf :NamedRecipe ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:someValuesFrom :Pepper
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:someValuesFrom :Porc
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:someValuesFrom :Tofu
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:allValuesFrom [ rdf:type owl:Class ;
+                                                owl:unionOf ( :Pepper
+                                                              :Porc
+                                                              :Tofu
+                                                            )
+                                              ]
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasCountryOfOrigin ;
+                            owl:hasValue :China
+                          ] .
+
+
+###  http://www.nutrition.com#Meat
+:Meat rdf:type owl:Class ;
+      rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#Milk
+:Milk rdf:type owl:Class ;
+      rdfs:subClassOf :Dairy .
+
+
+###  http://www.nutrition.com#MyRecipe
+:MyRecipe rdf:type owl:Class ;
+          rdfs:subClassOf :User ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Beans
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Fish
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasFood ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Meat
+                          ] .
+
+
+###  http://www.nutrition.com#NamedRecipe
+:NamedRecipe rdf:type owl:Class ;
+             rdfs:subClassOf :Recipe .
+
+
+###  http://www.nutrition.com#Pepper
+:Pepper rdf:type owl:Class ;
+        rdfs:subClassOf :Vegetable .
+
+
+###  http://www.nutrition.com#Porc
+:Porc rdf:type owl:Class ;
+      rdfs:subClassOf :Meat .
+
+
+###  http://www.nutrition.com#Recipe
+:Recipe rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasAge ;
+                          owl:someValuesFrom xsd:int
+                        ] .
+
+
+###  http://www.nutrition.com#Rice
+:Rice rdf:type owl:Class ;
+      rdfs:subClassOf :Grain .
+
+
+###  http://www.nutrition.com#Salmon
+:Salmon rdf:type owl:Class ;
+        rdfs:subClassOf :Fish ;
+        owl:disjointWith :Tuna .
+
+
+###  http://www.nutrition.com#Sex
+:Sex rdf:type owl:Class ;
+     rdfs:subClassOf :User .
+
+
+###  http://www.nutrition.com#Soja
+:Soja rdf:type owl:Class ;
+      rdfs:subClassOf :Beans .
+
+
+###  http://www.nutrition.com#Steak
+:Steak rdf:type owl:Class ;
+       rdfs:subClassOf :NamedRecipe ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasFood ;
+                         owl:someValuesFrom :Beef
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasFood ;
+                         owl:someValuesFrom :Butter
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasFood ;
+                         owl:someValuesFrom :Pepper
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasFood ;
+                         owl:allValuesFrom [ rdf:type owl:Class ;
+                                             owl:unionOf ( :Beef
+                                                           :Butter
+                                                           :Pepper
+                                                         )
+                                           ]
+                       ] .
+
+
+###  http://www.nutrition.com#Tofu
+:Tofu rdf:type owl:Class ;
+      rdfs:subClassOf :Beans ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasCountryOfOrigin ;
+                        owl:hasValue :China
+                      ] .
+
+
+###  http://www.nutrition.com#Tuna
+:Tuna rdf:type owl:Class ;
+      rdfs:subClassOf :Fish .
+
+
+###  http://www.nutrition.com#User
+:User rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasAge ;
+                        owl:someValuesFrom xsd:int
+                      ] .
+
+
+###  http://www.nutrition.com#Vegetable
+:Vegetable rdf:type owl:Class ;
+           rdfs:subClassOf :FoodType .
+
+
+###  http://www.nutrition.com#VegetarianRecipe
+:VegetarianRecipe rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Recipe
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :hasFood ;
+                                                               owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                                   owl:unionOf ( :Beans
+                                                                                                 :Dairy
+                                                                                                 :Fruit
+                                                                                                 :Grain
+                                                                                                 :Vegetable
+                                                                                               )
+                                                                                 ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Recipe .
+
+
+###  http://www.nutrition.com#Yogurt
+:Yogurt rdf:type owl:Class ;
+        rdfs:subClassOf :Dairy .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.nutrition.com#Beef
+:Beef rdf:type owl:NamedIndividual ,
+               :Beef ;
+      :hasCa "23.0"^^xsd:float ;
+      :hasCalorie "125.0"^^xsd:float ;
+      :hasDietaryFiber "0.0"^^xsd:float ;
+      :hasFat "4.2"^^xsd:float ;
+      :hasProtein "19.9"^^xsd:float ;
+      :hasVitaminC "0.0"^^xsd:float ;
+      :hasWeight "5.0"^^xsd:float .
+
+
+###  http://www.nutrition.com#China
+:China rdf:type owl:NamedIndividual .
+
+
+###  http://www.nutrition.com#France
+:France rdf:type owl:NamedIndividual .
+
+
+###  http://www.nutrition.com#Italie
+:Italie rdf:type owl:NamedIndividual .
+
+
+###  http://www.nutrition.com#Lettuce
+:Lettuce rdf:type owl:NamedIndividual ,
+                  :Lettuce ;
+         :hasCa "70.0"^^xsd:float ;
+         :hasCalorie "15.0"^^xsd:float ;
+         :hasDietaryFiber "0.6"^^xsd:float ;
+         :hasFat "0.4"^^xsd:float ;
+         :hasProtein "1.4"^^xsd:float ;
+         :hasVitaminC "20.0"^^xsd:float ;
+         :hasWeight "5.0"^^xsd:float .
+
+
+###  http://www.nutrition.com#Milk
+:Milk rdf:type owl:NamedIndividual ,
+               :Milk ;
+      :hasCa "676.0"^^xsd:float ;
+      :hasCalorie "476.0"^^xsd:float ;
+      :hasDietaryFiber "0.0"^^xsd:float ;
+      :hasFat "21.2"^^xsd:float ;
+      :hasProtein "20.1"^^xsd:float ;
+      :hasVitaminC "4.0"^^xsd:float ;
+      :hasWeight "1.0"^^xsd:float .
+
+
+###  http://www.nutrition.com#MyRecipe
+:MyRecipe rdf:type owl:NamedIndividual ,
+                   :MyRecipe ;
+          :hasFood :Beef ,
+                   :Lettuce ,
+                   :Milk ,
+                   :Soja ;
+          :hasUser :User .
+
+
+###  http://www.nutrition.com#Soja
+:Soja rdf:type owl:NamedIndividual ,
+               :Soja ;
+      :hasCa "191.0"^^xsd:float ;
+      :hasCalorie "446.0"^^xsd:float ;
+      :hasDietaryFiber "15.5"^^xsd:float ;
+      :hasFat "16.0"^^xsd:float ;
+      :hasProtein "36.0"^^xsd:float ;
+      :hasVitaminC "0.0"^^xsd:float ;
+      :hasWeight "2.0"^^xsd:float .
+
+
+###  http://www.nutrition.com#User
+:User rdf:type owl:NamedIndividual ,
+               :Male ;
+      :hasAge "23"^^xsd:int .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Almond
+                :Apple
+                :Banana
+                :Blueberry
+                :Coconut
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Butter
+                :Cheese
+                :Milk
+                :Yogurt
+              )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<urn:swrl:var#i> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#meat> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#nutrition1> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#weight1> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#n1> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#beans> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#nutrition2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#weight2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#n2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#lettuce> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#nutrition3> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#weight3> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#n3> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#n> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#user> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#age> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Meat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#meat>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCa ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight1>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n1>
+                                                                                                                                                           <urn:swrl:var#nutrition1>
+                                                                                                                                                           <urn:swrl:var#weight1>
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Beans ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#beans>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCa ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight2>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n2>
+                                                                                                                                                                                                                  <urn:swrl:var#nutrition2>
+                                                                                                                                                                                                                  <urn:swrl:var#weight2>
+                                                                                                                                                                                                                )
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :Lettuce ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#lettuce>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCa ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                    ] ;
+                                                                                                                                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight3>
+                                                                                                                                                                                                               ] ;
+                                                                                                                                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#weight3>
+                                                                                                                                                                                                                                                                       )
+                                                                                                                                                                                                                          ] ;
+                                                                                                                                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#add> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n1>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n2>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                                  )
+                                                                                                                                                                                                                                     ] ;
+                                                                                                                                                                                                                           rdf:rest rdf:nil
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCa ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#n>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Meat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#meat>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCalorie ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight1>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n1>
+                                                                                                                                                           <urn:swrl:var#nutrition1>
+                                                                                                                                                           <urn:swrl:var#weight1>
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Beans ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#beans>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCalorie ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight2>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n2>
+                                                                                                                                                                                                                  <urn:swrl:var#nutrition2>
+                                                                                                                                                                                                                  <urn:swrl:var#weight2>
+                                                                                                                                                                                                                )
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :Lettuce ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#lettuce>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCalorie ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                    ] ;
+                                                                                                                                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight3>
+                                                                                                                                                                                                               ] ;
+                                                                                                                                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#weight3>
+                                                                                                                                                                                                                                                                       )
+                                                                                                                                                                                                                          ] ;
+                                                                                                                                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#add> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n1>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n2>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                                  )
+                                                                                                                                                                                                                                     ] ;
+                                                                                                                                                                                                                           rdf:rest rdf:nil
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasCalorie ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#n>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Meat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#meat>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDietaryFiber ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight1>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n1>
+                                                                                                                                                           <urn:swrl:var#nutrition1>
+                                                                                                                                                           <urn:swrl:var#weight1>
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Beans ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#beans>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDietaryFiber ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight2>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n2>
+                                                                                                                                                                                                                  <urn:swrl:var#nutrition2>
+                                                                                                                                                                                                                  <urn:swrl:var#weight2>
+                                                                                                                                                                                                                )
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :Lettuce ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#lettuce>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDietaryFiber ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                    ] ;
+                                                                                                                                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight3>
+                                                                                                                                                                                                               ] ;
+                                                                                                                                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#weight3>
+                                                                                                                                                                                                                                                                       )
+                                                                                                                                                                                                                          ] ;
+                                                                                                                                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#add> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n1>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n2>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                                  )
+                                                                                                                                                                                                                                     ] ;
+                                                                                                                                                                                                                           rdf:rest rdf:nil
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDietaryFiber ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#n>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Meat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#meat>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFat ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight1>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n1>
+                                                                                                                                                           <urn:swrl:var#nutrition1>
+                                                                                                                                                           <urn:swrl:var#weight1>
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Beans ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#beans>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFat ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight2>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n2>
+                                                                                                                                                                                                                  <urn:swrl:var#nutrition2>
+                                                                                                                                                                                                                  <urn:swrl:var#weight2>
+                                                                                                                                                                                                                )
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :Lettuce ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#lettuce>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFat ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                    ] ;
+                                                                                                                                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight3>
+                                                                                                                                                                                                               ] ;
+                                                                                                                                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#weight3>
+                                                                                                                                                                                                                                                                       )
+                                                                                                                                                                                                                          ] ;
+                                                                                                                                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#add> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n1>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n2>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                                  )
+                                                                                                                                                                                                                                     ] ;
+                                                                                                                                                                                                                           rdf:rest rdf:nil
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFat ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#n>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Meat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#meat>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasProtein ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight1>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n1>
+                                                                                                                                                           <urn:swrl:var#nutrition1>
+                                                                                                                                                           <urn:swrl:var#weight1>
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Beans ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#beans>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasProtein ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight2>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n2>
+                                                                                                                                                                                                                  <urn:swrl:var#nutrition2>
+                                                                                                                                                                                                                  <urn:swrl:var#weight2>
+                                                                                                                                                                                                                )
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :Lettuce ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#lettuce>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasProtein ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                    ] ;
+                                                                                                                                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight3>
+                                                                                                                                                                                                               ] ;
+                                                                                                                                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#weight3>
+                                                                                                                                                                                                                                                                       )
+                                                                                                                                                                                                                          ] ;
+                                                                                                                                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#add> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n1>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n2>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                                  )
+                                                                                                                                                                                                                                     ] ;
+                                                                                                                                                                                                                           rdf:rest rdf:nil
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasProtein ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#n>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Meat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#meat>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasVitaminC ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition1>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#meat> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight1>
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n1>
+                                                                                                                                                           <urn:swrl:var#nutrition1>
+                                                                                                                                                           <urn:swrl:var#weight1>
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> :Beans ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans>
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#beans>
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasVitaminC ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition2>
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#beans> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight2>
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n2>
+                                                                                                                                                                                                                  <urn:swrl:var#nutrition2>
+                                                                                                                                                                                                                  <urn:swrl:var#weight2>
+                                                                                                                                                                                                                )
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#classPredicate> :Lettuce ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce>
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasFood ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#lettuce>
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                          rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasVitaminC ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                      <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                    ] ;
+                                                                                                                                                                                          rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                     rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasWeight ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#lettuce> ;
+                                                                                                                                                                                                                 <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#weight3>
+                                                                                                                                                                                                               ] ;
+                                                                                                                                                                                                     rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#multiply> ;
+                                                                                                                                                                                                                            <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#nutrition3>
+                                                                                                                                                                                                                                                                         <urn:swrl:var#weight3>
+                                                                                                                                                                                                                                                                       )
+                                                                                                                                                                                                                          ] ;
+                                                                                                                                                                                                                rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                                                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#add> ;
+                                                                                                                                                                                                                                       <http://www.w3.org/2003/11/swrl#arguments> ( <urn:swrl:var#n>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n1>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n2>
+                                                                                                                                                                                                                                                                                    <urn:swrl:var#n3>
+                                                                                                                                                                                                                                                                                  )
+                                                                                                                                                                                                                                     ] ;
+                                                                                                                                                                                                                           rdf:rest rdf:nil
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasVitaminC ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#n>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MyRecipe ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :User ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#user>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasUser ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#user>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasAge ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#user> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#age>
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasAge ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#i> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#age>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
